@@ -1,18 +1,26 @@
 {
-  "name": "copy_quizlet",
+  "name": "pwa-app",
   "version": "1.0.0",
   "description": "",
-  "main": "extract.js",
+  "main": "index.js",
   "scripts": {
-    "extract": "node extract.js",
-    "build:db": "node import_output_to_db.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "vite build && vite preview --host"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "cheerio": "^1.2.0"
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.2",
+    "sharp": "^0.34.5",
+    "vite": "^8.0.14",
+    "vite-plugin-pwa": "^1.3.0"
   }
 }
