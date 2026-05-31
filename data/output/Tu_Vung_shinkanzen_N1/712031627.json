@@ -1,0 +1,354 @@
+[
+  {
+    "kanji": "破たんに陥る",
+    "definition": "Phá Hãm はたん・おちいる rơi vào sự đổ bể (phá sản)"
+  },
+  {
+    "kanji": "財政が破たんする",
+    "definition": "Tài Chính Phá tài chính sụp đổ (vỡ nợ)"
+  },
+  {
+    "kanji": "赤字に転落する赤字＞＜黒字＝採算",
+    "definition": "Xích Tự Chuyển Lạc てんらく chuyển thành bị lỗ"
+  },
+  {
+    "kanji": "景気が低迷する衰退＝後退",
+    "definition": "Cảnh Khí Đê Mê ていめい suy thoái kinh tế"
+  },
+  {
+    "kanji": "景気の動向",
+    "definition": "Cảnh Khí Động Hướng どうこう sự chuyển động kinh tế"
+  },
+  {
+    "kanji": "経済に介入する介入＝干渉",
+    "definition": "Kinh Tế Giới Nhập かいにゅう can thiệp"
+  },
+  {
+    "kanji": "税率を引き下げる",
+    "definition": "Thuế Xuất Dẫn Hạ ひきさげる giảm"
+  },
+  {
+    "kanji": "税金を徴収する",
+    "definition": "Trưng Thu ちょうしゅう thu (thuế)"
+  },
+  {
+    "kanji": "税金を納入する",
+    "definition": "Nạp Nhập のうにゅう nộp (thuế)"
+  },
+  {
+    "kanji": "資金を運用する",
+    "definition": "Tư Kim Vận Dụng しきん・うんよう vận hành vốn"
+  },
+  {
+    "kanji": "インフレを引き起こす",
+    "definition": "Dẫn Khởi ひきおこす gây ra LẠM PHÁT"
+  },
+  {
+    "kanji": "デフレを引き起こす",
+    "definition": "Dẫn Khởi gây ra GIẢM PHÁT"
+  },
+  {
+    "kanji": "採算が合う・取れる",
+    "definition": "Thải Toán Hợp Thủ さいさん thu được lãi"
+  },
+  {
+    "kanji": "収支の均衡",
+    "definition": "Thu Chi Quân Hành しゅうし・きんこう cân bằng thu chi"
+  },
+  {
+    "kanji": "図る謀る諮る",
+    "definition": "Đồ はかる nhắm đến"
+  },
+  {
+    "kanji": "内訳",
+    "definition": "Nội Dịch うちわけ diễn giải (giao dịch)"
+  },
+  {
+    "kanji": "負債を抱える",
+    "definition": "Phụ Trái Bão ふさい・かかえる ôm nợ"
+  },
+  {
+    "kanji": "経営不振に陥る",
+    "definition": "Kinh Doan Bất Chấn ふしん kinh doanh không tốt"
+  },
+  {
+    "kanji": "外国企業と提携する",
+    "definition": "Đề Huề ていけい liên kết"
+  },
+  {
+    "kanji": "譲歩",
+    "definition": "Nhượng Bộ じょうほ nhượng bộ"
+  },
+  {
+    "kanji": "相手の譲歩を引き出す",
+    "definition": "Tương Thủ Nhượng Bộ ひきだす lôi kéo đối phương nhượng bộ"
+  },
+  {
+    "kanji": "交渉が妥結する妥当な値段妥協する",
+    "definition": "Thoả Kết だけつ thoả thuận, kết luận"
+  },
+  {
+    "kanji": "社会に還元する",
+    "definition": "Hoàn Nguyên かんげん hoàn trả lại"
+  },
+  {
+    "kanji": "林業に従事する＝～に携わる",
+    "definition": "Lâm Nghiệp Tùng Sự じゅうじする làm ~"
+  },
+  {
+    "kanji": "漁船",
+    "definition": "Ngư Thuyền ぎょせん thuyền cá"
+  },
+  {
+    "kanji": "港に停泊する",
+    "definition": "Đình Bạc ていはく neo đậu"
+  },
+  {
+    "kanji": "着工",
+    "definition": "Trước Công ちゃっこう khởi công"
+  },
+  {
+    "kanji": "製造する",
+    "definition": "Chế Tạo せいぞう chế tạo thuyền"
+  },
+  {
+    "kanji": "貨物船",
+    "definition": "Hoá Vật Thuyền かもつせん thuyền chở hàng"
+  },
+  {
+    "kanji": "工業地帯",
+    "definition": "Công Nghiệp Địa Đới こうぎょうちたい khu công nghiệp"
+  },
+  {
+    "kanji": "水産業",
+    "definition": "Thuỷ Sản Nghiệp すいさんぎょう ngành thuỷ sản"
+  },
+  {
+    "kanji": "鉱業",
+    "definition": "Khoáng Nghiệp こうぎょう ngành khoáng sản"
+  },
+  {
+    "kanji": "運輸業",
+    "definition": "Vận Thâu Nghiệp うんゆぎょう ngành vận chuyển"
+  },
+  {
+    "kanji": "小売業",
+    "definition": "Tiểu Mại Nghiệp こうりぎょう ngành bán lẻ"
+  },
+  {
+    "kanji": "福祉",
+    "definition": "Phúc Chỉ ふくし phúc lợi xã hội"
+  },
+  {
+    "kanji": "重工業",
+    "definition": "Trọng Công Nghiệp じゅうこうぎょう công nghiệp nặng"
+  },
+  {
+    "kanji": "鉄鋼業",
+    "definition": "Thiết Cương Nghiệp てっこうぎょう công nghiệp luyện kim"
+  },
+  {
+    "kanji": "造船業",
+    "definition": "Tạo Thuyền Nghiệp ぞうせんぎょう công nghiệp đóng thuyền"
+  },
+  {
+    "kanji": "軽工業",
+    "definition": "Khinh Công Nghiệp けいこうぎょう công nghiệp nhẹ"
+  },
+  {
+    "kanji": "繊維工業",
+    "definition": "Tiêm Duy Nghiệp せんいこうぎょう công nghiệp may mặc"
+  },
+  {
+    "kanji": "段階的に",
+    "definition": "Đoạn Giai Tính だんかいてき mang tính giai đoạn"
+  },
+  {
+    "kanji": "一気に",
+    "definition": "いっき một hơi"
+  },
+  {
+    "kanji": "どうにか",
+    "definition": "bằng mọi cách thì muốn ~"
+  },
+  {
+    "kanji": "転換",
+    "definition": "Chuyển Hoán てんかん chuyển đổi, thay đổi"
+  },
+  {
+    "kanji": "促す",
+    "definition": "Thúc うながす thúc đẩy"
+  },
+  {
+    "kanji": "質疑を行う",
+    "definition": "Chất Nghi しつぎ tổ chức chất vấn"
+  },
+  {
+    "kanji": "異論を唱える異議を唱える ＝ 反対",
+    "definition": "Dị Luận Xướng ぎろん・となえる đưa ra ý kiến bất đồng"
+  },
+  {
+    "kanji": "議論を踏まえる",
+    "definition": "Nghị Luận Đạp ふまえる dựa trên"
+  },
+  {
+    "kanji": "承認を得る",
+    "definition": "Thừa Nhận Đắc しょうにん・える nhận được sự đồng ý"
+  },
+  {
+    "kanji": "採決を取る",
+    "definition": "Thải Quyết Thủ さいけつ biểu quyết"
+  },
+  {
+    "kanji": "法案が審議される",
+    "definition": "Pháp Án Thẩm Nghị ほうあん・しんぎ xem xét dự thảo luật"
+  },
+  {
+    "kanji": "法案を採択される",
+    "definition": "Pháp Án Thải Trạch ほうあん・さいたく lựa chọn"
+  },
+  {
+    "kanji": "議題に入る",
+    "definition": "Nghị Đề Nhập ぎだい chủ đề thảo luận"
+  },
+  {
+    "kanji": "制度を改革する",
+    "definition": "Chế Độ Cải Cách かいかく cải cách"
+  },
+  {
+    "kanji": "法律を制定する",
+    "definition": "Pháp Luật Chế Định せいてい ban hành"
+  },
+  {
+    "kanji": "法律を整備する",
+    "definition": "Pháp Luật Chỉnh Bị せいび hoàn thiện"
+  },
+  {
+    "kanji": "法律を改定する",
+    "definition": "Pháp Luật Cải Định かいてい sửa đổi"
+  },
+  {
+    "kanji": "法律を施行する",
+    "definition": "Pháp Luật Thi Hành しこう thi hành"
+  },
+  {
+    "kanji": "規制が緩和される",
+    "definition": "Quy Chế Hoãn Hoà かんわ quy chế được nới lỏng"
+  },
+  {
+    "kanji": "声明を発表する",
+    "definition": "Thanh Minh Phát Biểu せいめい tuyên bố"
+  },
+  {
+    "kanji": "措置処理処置処方処分",
+    "definition": "Vạn Toàn Thố Trí ばんぜん・そち biện pháp tốt nhất万全の措置処理緊急処置薬の処方ゴミの処分"
+  },
+  {
+    "kanji": "異例の措置",
+    "definition": "Dị Lệ Thố Trí いれい biện pháp chưa từng có"
+  },
+  {
+    "kanji": "寛大な",
+    "definition": "Khoan Đại かんだい rộng lượng"
+  },
+  {
+    "kanji": "条約に調印する",
+    "definition": "Điều Ước Điều Ấn ちょういん kí kết điều ước"
+  },
+  {
+    "kanji": "閣僚が協議を行う",
+    "definition": "Các Liêu Hiệp Nghị かくりょう・きょうぎ nội các đàm phán"
+  },
+  {
+    "kanji": "政治が腐敗する",
+    "definition": "Chính Trị Hủ Bại ふはい chính trị hủ bại, mục nát"
+  },
+  {
+    "kanji": "ビザを発給する発行する",
+    "definition": "Phát Cấp はっきゅう phát hành"
+  },
+  {
+    "kanji": "訴訟",
+    "definition": "Tố Tụng そしょう tố tụng"
+  },
+  {
+    "kanji": "賠償",
+    "definition": "Bồi Thường ばいしょう bồi thường"
+  },
+  {
+    "kanji": "検察に告訴する",
+    "definition": "Kiểm Sát Cáo Tố けんさつ・こくそ tố cáo bên kiểm sát"
+  },
+  {
+    "kanji": "基本的人権",
+    "definition": "Cơ Bản Tính Nhân Quyền きほんてきじんけん nhân quyền cơ bản"
+  },
+  {
+    "kanji": "判決が下る",
+    "definition": "Phán Quyết Hạ はんけつ phán quyết được đưa ra"
+  },
+  {
+    "kanji": "死刑",
+    "definition": "Tử Hình しけい tử hình"
+  },
+  {
+    "kanji": "懲役",
+    "definition": "Trưng Dịch ちょうえき phạt tù"
+  },
+  {
+    "kanji": "国家を形成する",
+    "definition": "Quốc Gia Hình Thành けいせい hình thành quốc gia"
+  },
+  {
+    "kanji": "異民族に侵略される",
+    "definition": "Xâm Lược いみんぞく・しんりゃく bị dân tộc khác xâm lược"
+  },
+  {
+    "kanji": "復興する",
+    "definition": "Phục Hứng ふっこう phục hưng"
+  },
+  {
+    "kanji": "古代文明の繁栄",
+    "definition": "Phồn Vinh はんえい phồn vinh"
+  },
+  {
+    "kanji": "古代文明の衰退",
+    "definition": "Suy Thoái すいたい suy thoái"
+  },
+  {
+    "kanji": "内戦",
+    "definition": "Nội Chiến ないせん nội chiến"
+  },
+  {
+    "kanji": "紛争",
+    "definition": "Phân Tranh ふんそう phân tranh"
+  },
+  {
+    "kanji": "分断する",
+    "definition": "Phân Đoạn ぶんだん chia tách ra"
+  },
+  {
+    "kanji": "住居跡を発掘する",
+    "definition": "Trú Cư Tích Phát Quật じゅうきょあと・はっくつ khai quật di tích dân cư"
+  },
+  {
+    "kanji": "軍事力を増強する",
+    "definition": "Quân Sự Lực Tăng Cường ぞうきょう củng cố quân sự"
+  },
+  {
+    "kanji": "再三",
+    "definition": "Tái Tam さいさん nhiều lần"
+  },
+  {
+    "kanji": "一向に",
+    "definition": "Nhất Hướng いっこう hoàn toàn không ~"
+  },
+  {
+    "kanji": "大幅に",
+    "definition": "Đại Phúc おおはば nhiều, lớn"
+  },
+  {
+    "kanji": "抜本的",
+    "definition": "Bạt Bản Tính ばっぽんてき tận gốc, triệt để"
+  }
+]

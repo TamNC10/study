@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#1a73e8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/icon-192.png" />
+  <title>Nihongo Study App</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    // iOS fix: when app cold-starts offline, SW may not control the page yet
+    if ('serviceWorker' in navigator && !navigator.serviceWorker.controller) {
+      navigator.serviceWorker.ready.then(function() {
+        if (!navigator.serviceWorker.controller) {
+          window.location.reload();
+        }
+      });
+    }
+  </script>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>

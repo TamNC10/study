@@ -1,0 +1,5 @@
+node extract.js
+node import_output_to_db.js
+
+npx vite preview --host
+npm run serve
