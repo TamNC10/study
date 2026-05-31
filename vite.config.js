@@ -18,7 +18,7 @@ export default defineConfig({
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/',
+        start_url: '/study/',
         icons: [
           {
             src: 'icon-192.png',
@@ -34,7 +34,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,json,png,svg,ico}'],
-        navigateFallback: 'index.html',
+        navigateFallback: '/study/index.html',
         navigateFallbackDenylist: [/^\/api/],
         runtimeCaching: [
           {
