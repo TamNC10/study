@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  base: '/study/',
+  base: '/study/dist/',
   plugins: [
     react(),
     VitePWA({
@@ -18,7 +18,7 @@ export default defineConfig({
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/study/',
+        start_url: '/study/dist/',
         icons: [
           {
             src: 'icon-192.png',
@@ -34,7 +34,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,json,png,svg,ico}'],
-        navigateFallback: '/study/index.html',
+        navigateFallback: '/study/dist/index.html',
         navigateFallbackDenylist: [/^\/api/],
         runtimeCaching: [
           {
