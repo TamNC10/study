@@ -2,26 +2,186 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#1a73e8" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/icon-192.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Nihongo Study App</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="css/styles.css?v=1" />
 </head>
 <body>
-  <div id="root"></div>
-  <script>
-    // iOS fix: when app cold-starts offline, SW may not control the page yet
-    if ('serviceWorker' in navigator && !navigator.serviceWorker.controller) {
-      navigator.serviceWorker.ready.then(function() {
-        if (!navigator.serviceWorker.controller) {
-          window.location.reload();
-        }
-      });
-    }
-  </script>
-  <script type="module" src="/src/main.jsx"></script>
+  <div class="app-shell">
+  <header class="app-header">
+
+    <!-- LEFT SIDE -->
+    <div class="header-left">
+
+      <!-- BACK BUTTON -->
+      <button id="btnBackGlobal" class="back-btn-header">←</button>
+
+      <div class="app-title">
+        
+        <div class="app-title-text">
+          <h1>Nihongo Study App</h1>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="group-selector">
+      <select id="groupSelect" aria-label="Chọn nhóm học"></select>
+    </div>
+
+  </header>
+
+
+    <main class="app-main">
+      <section id="summaryView" class="view active">
+        <div id="summaryContent" class="summary-content">
+
+
+          <div class="panel card">
+            <div class="panel-header">
+              <span id="lessonCount" class="muted"></span>
+            </div>
+            <ul id="lessonList" class="lesson-list"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="lessonView" class="view">
+
+
+      <div class="panel card action-bar-pro">
+        <div class="action-card study" id="btnStudy">
+          <div class="action-icon">🃏</div>
+          <div class="action-content">
+            <strong>Học Kanji</strong>
+            <span>Lật flashcard từng từ</span>
+          </div>
+        </div>
+
+        <div class="action-card quiz" id="btnQuiz">
+          <div class="action-icon">🧠</div>
+          <div class="action-content">
+            <strong>Làm Quiz</strong>
+            <span>Kiểm tra ghi nhớ</span>
+          </div>
+        </div>
+      </div>
+
+
+        <div class="panel card">
+          <ul id="kanjiList" class="kanji-list"></ul>
+        </div>
+      </section>
+
+      <section id="studyView" class="view">
+        <div class="panel card panel-inline">
+          <div>
+            <p id="studyInfo" class="muted"></p>
+          </div>
+        </div>
+        <div class="study-progress">
+          <span id="studyProgressText">0 / 0</span>
+        </div>
+
+        <div class="card study-card">
+          <div id="studyCard" class="study-card-inner">
+            <div class="study-card-face study-card-front">
+              
+              <div class="card-content">
+
+                <div id="studyCardKanji" class="kanji-main-card">良い</div>
+
+                <div class="card-hint">
+                  Tap để lật
+                </div>
+
+              </div>
+
+            </div>
+            <div class="study-card-face study-card-back">
+              
+                <div class="card-content">
+
+                    <div id="studyCardDefinition"  class="kanji-meaning">  </div>
+
+                  </div>
+            </div>
+          </div>
+        </div>
+
+          <!-- NAVIGATION -->
+          <div class="study-nav">
+            <button id="btnPrev" class="nav-btn">
+              ← Trước
+            </button>
+
+            <button id="btnNext" class="nav-btn primary">
+              Tiếp →
+            </button>
+          </div>
+
+          <!-- STATUS -->
+
+          <div class="study-actions-pro">
+
+            <button id="btnFlip" class="action-btn flip">
+              <span class="icon">🔄</span>
+              <span class="label">Lật</span>
+            </button>
+
+            <button id="btnStatusUnlearned" class="action-btn neutral">
+              <span class="icon">⬜</span>
+              <span class="label">Chưa học</span>
+            </button>
+
+            <button id="btnStatusReview" class="action-btn review">
+              <span class="icon">🔁</span>
+              <span class="label">Ôn lại</span>
+            </button>
+
+            <button id="btnStatusLearned" class="action-btn learned">
+              <span class="icon">✅</span>
+              <span class="label">Đã thuộc</span>
+            </button>
+
+          </div>
+
+
+      </section>
+
+      <section id="quizView" class="view">
+
+        <!-- TOP BAR -->
+        <div class="panel card quiz-header">
+
+          <div class="quiz-meta">
+            <p id="quizInfo" class="muted"></p>
+            <div class="quiz-progress">
+              <span id="quizProgress">1 / 10</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAIN CARD -->
+        <div class="card quiz-card-pro">
+
+          <div id="quizQuestion" class="quiz-question-pro">
+            Chọn định nghĩa đúng
+          </div>
+
+          <div id="quizOptions" class="quiz-options-pro">
+            <!-- options -->
+          </div>
+
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
