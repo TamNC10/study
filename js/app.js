@@ -57,6 +57,8 @@ const state = {
 const STORAGE_KEYS = {
   selectedGroup: 'selected-group',
   studyStatus: 'study-status',
+
+  lastState: 'last-state',
 };
 
 function parseStudyStatus(raw) {
@@ -72,6 +74,11 @@ function renderView(viewId) {
   });
 
    updateBackButton();
+
+   
+  // ✅ save mỗi lần chuyển view
+  saveLastState(viewId);
+
 }
 
 function formatCount(value) {
@@ -183,7 +190,12 @@ function openStudyMode() {
     return;
   }
   const set = dataStore.getSetById(state.currentSetId);
-  state.currentStudyIndex = 0;
+  
+  // ❌ bỏ reset = 0 nếu đã có
+  if (state.currentStudyIndex == null) {
+    state.currentStudyIndex = 0;
+  }
+
   elements.studyInfo.textContent = `${set.lesson} · ${formatCount(set.totalCards)} từ`;
   renderStudyCard();
   renderView('studyView');
@@ -278,9 +290,10 @@ function openQuizMode() {
 
   const set = dataStore.getSetById(state.currentSetId);
   state.quizTotal = set.items.length;
-  // ✅ reset progress
-  state.quizIndex = 0;
-  state.quizCorrect = 0; // ✅ reset
+
+  // ❗ chỉ reset nếu chưa có dữ liệu
+  if (state.quizIndex == null) state.quizIndex = 0;
+  if (state.quizCorrect == null) state.quizCorrect = 0;
 
   prepareQuizQuestion();
   updateQuizProgress();
@@ -300,22 +313,36 @@ function prepareQuizQuestion() {
   if (!set) {
     return;
   }
-  const groupItems = dataStore.getGroupSets(set.group).flatMap((item) => item.items);
+  
+  set.items = set.items.map((item, index) => ({
+    ...item,
+    id: item.id || `${set.id}-${index}`
+  }));
+
+  const groupItems = dataStore
+  .getGroupSets(set.group)
+  .flatMap(setItem =>
+    setItem.items.map((item, index) => ({
+      ...item,
+      id: item.id || `${setItem.id}-${index}`
+    }))
+  );
   const shuffledSet = shuffleArray([...set.items]);
   const questionItem = shuffledSet[Math.floor(Math.random() * shuffledSet.length)];
   const otherOptions = groupItems
     .filter((item) => item.definition !== questionItem.definition)
     .sort(() => Math.random() - 0.5)
-    .slice(0, 3)
-    .map((item) => item.definition);
+    .slice(0, 3);
+    //.map((item) => item.definition);
 
-  const options = shuffleArray([questionItem.definition, ...otherOptions]);
+  const options = shuffleArray([questionItem, ...otherOptions]);
   state.currentQuiz = {
     setId: set.id,
     lesson: set.lesson,
     group: set.group,
     kanji: questionItem.kanji,
     correct: questionItem.definition,
+    correctId: questionItem.id,
     options,
   };
 
@@ -329,37 +356,57 @@ function renderQuizQuestion() {
 
   elements.quizQuestion.textContent = `${state.currentQuiz.kanji}`;
   elements.quizOptions.innerHTML = '';
+  const labels = ['A', 'B', 'C', 'D'];
+
   state.currentQuiz.options.forEach((optionText, index) => {
     const option = document.createElement('button');
     option.type = 'button';
-    option.className = 'quiz-option default';
-    option.textContent = optionText;
-    option.addEventListener('click', () => handleQuizAnswer(optionText, option));
+    option.className = 'quiz-option pro';
+    option.dataset.id = optionText.id;
+    option.innerHTML = `
+      <div class="option-left">
+        <span class="option-label">${labels[index]}</span>
+      </div>
+      <div class="option-text">${optionText.definition}</div>
+      <div class="option-icon"></div>
+    `;
+//console.log('Render option:', optionText.definition, 'Correct:', state.currentQuiz.correct);
+    option.addEventListener('click', () => handleQuizAnswer(optionText.id, option));
     elements.quizOptions.appendChild(option);
   });
 
   elements.quizInfo.textContent = `${state.currentQuiz.lesson} · Nhóm ${state.currentQuiz.group}`;
 }
 
-function handleQuizAnswer(answer, buttonElement) {
+function handleQuizAnswer(selectedId, buttonElement) {
   if (!state.currentQuiz) return;
 
-  const correct = answer === state.currentQuiz.correct;
+  const correctId = state.currentQuiz.correctId;
 
-  // ✅ nếu đúng thì tăng
-  if (correct) {
-    state.quizCorrect++;
-  }
+  const isCorrect = String(selectedId) === String(correctId);
 
-  Array.from(elements.quizOptions.children).forEach(child => {
-    child.disabled = true;
+  if (isCorrect) state.quizCorrect++;
 
-    if (child.textContent === state.currentQuiz.correct) {
-      child.className = 'quiz-option correct';
+  Array.from(elements.quizOptions.children).forEach(el => {
+    el.disabled = true;
+
+    const id = el.dataset.id;
+
+    // ✅ đúng
+    if (id === correctId) {
+      el.classList.add('correct');
+      el.querySelector('.option-icon').innerHTML = '✅';
     }
 
-    if (child.textContent === answer && !correct) {
-      child.className = 'quiz-option incorrect';
+    // ✅ sai (user chọn)
+    if (id === selectedId && !isCorrect) {
+      el.classList.add('incorrect');
+      el.querySelector('.option-icon').innerHTML = '❌';
+    }
+
+    // ✅ dim
+    if (id !== correctId && id !== selectedId) {
+      el.classList.add('dim');
     }
   });
 
@@ -367,8 +414,7 @@ function handleQuizAnswer(answer, buttonElement) {
 
   setTimeout(() => {
     if (state.quizIndex >= state.quizTotal) {
-      // ✅ show result cuối
-      alert(`🎯 Kết quả: ${state.quizCorrect} / ${state.quizTotal}`);
+      alert(`🎯 ${state.quizCorrect}/${state.quizTotal}`);
       renderView('lessonView');
       return;
     }
@@ -376,7 +422,7 @@ function handleQuizAnswer(answer, buttonElement) {
     prepareQuizQuestion();
     updateQuizProgress();
 
-  }, 800);
+  }, 1200);
 }
 
 
@@ -399,19 +445,40 @@ async function saveState(key, payload) {
   await dataStore.saveObject(key, payload);
 }
 
+function enrichDataWithIds() {
+  dataStore.getAllSets().forEach(set => {
+    set.items.forEach((item, index) => {
+      if (!item.id) {
+        item.id = `${set.id}-${index}`;
+      }
+    });
+  });
+}
+
 async function initializeApp() {
   try {
     await dataStore.init();
+    enrichDataWithIds();
     await loadState();
+
+    const lastState = await dataStore.getSavedObject(STORAGE_KEYS.lastState);
+
     populateGroupOptions();
     if (!state.currentGroup) {
       state.currentGroup = dataStore.getGroupNames()[0] || null;
     }
     elements.groupSelect.value = state.currentGroup;
     renderGroupDetails(state.currentGroup);
-    renderView('summaryView');
+    
+    // ✅ restore
+    if (lastState) {
+      restoreLastState(lastState);
+    } else {
+      renderView('summaryView');
+    }
+
     registerEvents();
-    registerServiceWorker();
+    //registerServiceWorker();
   } catch (error) {
     console.error(error);
     alert('Không thể khởi tạo ứng dụng. Vui lòng kiểm tra kết nối hoặc dữ liệu JSON.');
@@ -490,6 +557,42 @@ function handleGlobalBack() {
 function updateBackButton() {
   const isSummary = elements.summaryView.classList.contains('active');
   elements.btnBackGlobal.style.display = isSummary ? 'none' : 'flex';
+}
+
+async function saveLastState(viewId) {
+  const payload = {
+    view: viewId,
+    setId: state.currentSetId,
+    studyIndex: state.currentStudyIndex,
+    quizIndex: state.quizIndex,
+    quizCorrect: state.quizCorrect
+  };
+
+  await saveState(STORAGE_KEYS.lastState, payload);
+}
+function restoreLastState(saved) {
+  state.currentSetId = saved.setId;
+
+  if (saved.view === 'lessonView') {
+    openLesson(saved.setId);
+    return;
+  }
+
+  if (saved.view === 'studyView') {
+    state.currentStudyIndex = saved.studyIndex || 0;
+    openStudyMode();
+    return;
+  }
+
+  if (saved.view === 'quizView') {
+    state.quizIndex = saved.quizIndex || 0;
+    state.quizCorrect = saved.quizCorrect || 0;
+
+    openQuizMode();
+    return;
+  }
+
+  renderView('summaryView');
 }
 
 initializeApp();

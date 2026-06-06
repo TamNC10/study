@@ -982,13 +982,143 @@ select {
   opacity: 0.8;
   cursor: not-allowed;
 }
+/* ===== OPTION PRO ===== */
+.quiz-option.pro {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 
+  padding: 16px;
+  border-radius: 16px;
+
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(148,163,184,0.2);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* hover */
+.quiz-option.pro:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 25px rgba(96,165,250,0.25);
+}
+
+/* LEFT LABEL */
+.option-label {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  font-weight: 700;
+
+  background: rgba(96,165,250,0.15);
+  color: #93c5fd;
+}
+
+/* TEXT */
+.option-text {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* ===== STATES ===== */
+
+/* selected */
+.quiz-option.selected {
+  border-color: var(--accent);
+  background: rgba(96,165,250,0.1);
+}
+
+/* correct */
+.quiz-option.correct {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border: none;
+  color: white;
+  animation: pulseSuccess 0.35s ease;
+}
+
+/* wrong */
+.quiz-option.incorrect {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  border: none;
+  color: white;
+}
+
+/* disable */
+.quiz-option:disabled {
+  opacity: 0.85;
+  cursor: not-allowed;
+}
+
+/* animation */
+@keyframes pulseSuccess {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
 /* animation */
 @keyframes pulseSuccess {
   0% { transform: scale(1); }
   50% { transform: scale(1.03); }
   100% { transform: scale(1); }
 }
+/* icon right */
+.option-icon {
+  width: 28px;
+  text-align: right;
+  font-size: 1.1rem;
+}
+
+/* correct */
+.quiz-option.correct {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border: none;
+  color: white;
+  box-shadow: 0 0 20px rgba(34,197,94,0.5);
+}
+
+/* incorrect */
+.quiz-option.incorrect {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  border: none;
+  color: white;
+  box-shadow: 0 0 20px rgba(239,68,68,0.5);
+}
+
+/* dim các option khác */
+.quiz-option.dim {
+  opacity: 0.4;
+  transform: scale(0.98);
+}
+
+/* animation */
+.quiz-option.correct {
+  animation: correctPop 0.35s ease;
+}
+
+@keyframes correctPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.quiz-option.incorrect {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
 
 @media (max-width: 720px) {
   .app-header,
