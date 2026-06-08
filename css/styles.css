@@ -43,20 +43,6 @@ select {
   min-height: 100vh;
 }
 
-.app-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 12px 14px;
-  background: rgba(15, 23, 42, 0.92);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  backdrop-filter: blur(10px);
-}
-
 .header-actions {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -77,7 +63,11 @@ select {
 
 .app-title-text h1 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1rem;  
+  white-space: nowrap;     /* ✅ không xuống dòng */
+  overflow: hidden;
+  text-overflow: ellipsis; /* ✅ ... nếu dài */
+
 }
 
 .app-title-text p {
@@ -98,6 +88,7 @@ select {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  align-items: flex-end;
 }
 
 .group-selector label {
@@ -501,6 +492,12 @@ select {
   background: rgba(15, 23, 42, 0.7);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(148,163,184,0.1);
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* quan trọng */
+  gap: 12px;
+  flex-wrap: nowrap; /* ✅ cấm xuống dòng */
 }
 
 /* Select đẹp hơn */
@@ -847,7 +844,14 @@ select {
 .header-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 12px;  
+  flex: 1;           /* ✅ chiếm phần còn lại */
+  min-width: 0;      /* ✅ fix overflow text */
+
+}
+#groupSelect {
+  max-width: 220px;   /* hoặc 200 */
+  width: 100%;
 }
 
 /* ===== BACK BUTTON HEADER ===== */
@@ -1119,6 +1123,47 @@ select {
   75% { transform: translateX(4px); }
 }
 
+.quiz-result-card {
+  text-align: center;
+  padding: 24px;
+  animation: fadeIn 0.3s ease;
+}
+
+.result-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.result-score {
+  font-size: 32px;
+  font-weight: bold;
+  color: #22c55e;
+}
+
+.result-text {
+  margin-top: 8px;
+  color: #94a3b8;
+}
+
+.result-btn {
+  margin-top: 16px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+.result-btn.secondary {
+  background: #334155;
+  margin-left: 8px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
 
 @media (max-width: 720px) {
   .app-header,

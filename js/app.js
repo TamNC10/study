@@ -42,14 +42,12 @@ const state = {
   currentStudyIndex: 0,
   currentQuiz: null,
   studyStatus: {},
-
   
   currentQuiz: null,
   quizIndex: 0,
   quizTotal: 10, // hoặc set.items.length nếu muốn full
-
   quizCorrect: 0,
-
+  quizQueue: [],
   studyStatus: {},
 
 };
@@ -69,16 +67,19 @@ function parseStudyStatus(raw) {
 }
 
 function renderView(viewId) {
-  [elements.summaryView, elements.lessonView, elements.studyView, elements.quizView].forEach((section) => {
-    section.classList.toggle('active', section.id === viewId);
-  });
+  [elements.summaryView, elements.lessonView, elements.studyView, elements.quizView]
+    .forEach((section) => {
+      section.classList.toggle('active', section.id === viewId);
+    });
 
-   updateBackButton();
+  // ✅ AUTO RENDER
+  if (viewId === 'lessonView' && state.currentSetId) {
+    const set = dataStore.getSetById(state.currentSetId);
+    renderLessonItems(set);
+  }
 
-   
-  // ✅ save mỗi lần chuyển view
+  updateBackButton();
   saveLastState(viewId);
-
 }
 
 function formatCount(value) {
@@ -289,11 +290,18 @@ function openQuizMode() {
   if (!state.currentSetId) return;
 
   const set = dataStore.getSetById(state.currentSetId);
-  state.quizTotal = set.items.length;
+  
+  // ✅ tạo queue không trùng
+  state.quizQueue = shuffleArray(
+    set.items.map((item, index) => ({
+      ...item,
+      id: item.id || `${set.id}-${index}`
+    }))
+  );
 
-  // ❗ chỉ reset nếu chưa có dữ liệu
-  if (state.quizIndex == null) state.quizIndex = 0;
-  if (state.quizCorrect == null) state.quizCorrect = 0;
+  state.quizTotal = set.items.length;
+  state.quizIndex = 0;
+  state.quizCorrect = 0;
 
   prepareQuizQuestion();
   updateQuizProgress();
@@ -310,40 +318,32 @@ function updateQuizProgress() {
 
 function prepareQuizQuestion() {
   const set = dataStore.getSetById(state.currentSetId);
-  if (!set) {
-    return;
-  }
-  
-  set.items = set.items.map((item, index) => ({
-    ...item,
-    id: item.id || `${set.id}-${index}`
-  }));
+  if (!set) return;
+
+  // ✅ lấy theo index
+  const questionItem = state.quizQueue[state.quizIndex];
 
   const groupItems = dataStore
-  .getGroupSets(set.group)
-  .flatMap(setItem =>
-    setItem.items.map((item, index) => ({
-      ...item,
-      id: item.id || `${setItem.id}-${index}`
-    }))
-  );
-  const shuffledSet = shuffleArray([...set.items]);
-  const questionItem = shuffledSet[Math.floor(Math.random() * shuffledSet.length)];
+    .getGroupSets(set.group)
+    .flatMap(setItem =>
+      setItem.items.map((item, index) => ({
+        ...item,
+        id: item.id || `${setItem.id}-${index}`
+      }))
+    );
+
   const otherOptions = groupItems
-    .filter((item) => item.definition !== questionItem.definition)
+    .filter(item => item.definition !== questionItem.definition)
     .sort(() => Math.random() - 0.5)
     .slice(0, 3);
-    //.map((item) => item.definition);
 
   const options = shuffleArray([questionItem, ...otherOptions]);
+
   state.currentQuiz = {
-    setId: set.id,
-    lesson: set.lesson,
-    group: set.group,
     kanji: questionItem.kanji,
     correct: questionItem.definition,
     correctId: questionItem.id,
-    options,
+    options
   };
 
   renderQuizQuestion();
@@ -410,12 +410,16 @@ function handleQuizAnswer(selectedId, buttonElement) {
     }
   });
 
-  state.quizIndex++;
+  state.quizIndex = Math.min(state.quizIndex + 1, state.quizTotal);
 
   setTimeout(() => {
     if (state.quizIndex >= state.quizTotal) {
-      alert(`🎯 ${state.quizCorrect}/${state.quizTotal}`);
-      renderView('lessonView');
+      showQuizResult();
+
+      state.quizIndex = 0;
+      state.quizCorrect = 0;
+      state.currentQuiz = null;
+
       return;
     }
 
@@ -423,6 +427,36 @@ function handleQuizAnswer(selectedId, buttonElement) {
     updateQuizProgress();
 
   }, 1200);
+}
+
+function showQuizResult() {
+  elements.quizQuestion.innerHTML = `
+    <div class="quiz-result-card">
+      <div class="result-icon">🎯</div>
+      <div class="result-score">
+        ${state.quizCorrect} / ${state.quizTotal}
+      </div>
+      <div class="result-text">
+        Hoàn thành bài test
+      </div>
+      <button id="btnRetryQuiz" class="result-btn">
+        Làm lại
+      </button>
+      <button id="btnBackLesson" class="result-btn secondary">
+        Quay lại
+      </button>
+    </div>
+  `;
+
+  elements.quizOptions.innerHTML = '';
+
+  document.getElementById('btnRetryQuiz').onclick = () => {
+    openQuizMode();
+  };
+
+  document.getElementById('btnBackLesson').onclick = () => {
+    renderView('lessonView');
+  };
 }
 
 
@@ -536,7 +570,7 @@ function registerServiceWorker() {
   }
 }
 function handleGlobalBack() {
-  if (elements.studyView.classList.contains('active')) {
+  if (elements.studyView.classList.contains('active')) {    
     renderView('lessonView');
     return;
   }
